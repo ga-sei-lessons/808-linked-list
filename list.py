@@ -34,7 +34,21 @@ class LinkedList:
     def __str__(self):
         # return a meaningful string representaion of our list
         # iterate over the list, concatenante very node's value into a string
-        pass
+        # if the list if empty, we will just return empty
+        if len(self) == 0:
+            return '[]'
+        
+        # the current node
+        current_node = self.head
+        string = str(current_node)
+        # while the current node has a next value
+        while current_node.next:
+            # buisness logic of the loop -- adding current node's value to our return string
+            string += f' -> {str(current_node.next)}'
+            # the current node to be the current node's next
+            current_node = current_node.next
+        
+        return f'[ {string} ]'
 
     def insert_front(self, data):
         '''
@@ -71,5 +85,8 @@ print(len(my_list))
 my_list.insert_front(5)
 my_list.insert_front(4)
 my_list.insert_front(3)
+my_list.insert_front(2)
+my_list.insert_front(10)
 print(f'head: {my_list.head}, tail: {my_list.tail}, head.next: {my_list.head.next}')
+print(my_list)
 
