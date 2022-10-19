@@ -66,27 +66,65 @@ class LinkedList:
         # increment the size of our list
         self.size += 1
 
-    def insert_end(self):
+    def insert_end(self, data):
         '''
             create a new node and place it at the end of the list
         '''
-        pass
+        # if this is the first thing placed in the list 
+        if len(self) == 0:
+            self.head = Node(data, None)
+            self.tail = self.head
+        # if this is not the first thing
+        else:
+            # create a new node
+            new_node = Node(data, None)
+            # set the current tail's next to be the new node
+            self.tail.next = new_node
+            # set the tail of the list to be the new node
+            self.tail = new_node
+        # increment the size of the list
+        self.size += 1
 
-    def insert_after(self):
+    def insert_after(self, after, new_data):
         '''
             search for a node, and insert a new node after it
         '''
-        pass
+        # keep track of the current node, starting at the head
+        current_node = self.head
+        # loop while current node exits
+        while current_node:
+            # check if current node's value equals the value we want to insert after
+            if current_node.data == after:
+                # if so, we will break the loop
+                break
+            # advance loop to next node
+            current_node = current_node.next
+        # if current node is None -- return -1 (not inserted -- value not found)
+        if current_node == None:
+            return -1 # nothing was inserted
+        # create a new node -- with a next from the current node
+        new_node = Node(new_data, current_node.next)
+        # overwrite current_node's next with the newly created node
+        current_node.next = new_node
+        # increment size
+        self.size += 1
+
 
     
 
 my_list = LinkedList()
-print(len(my_list))
+# print(len(my_list))
 my_list.insert_front(5)
 my_list.insert_front(4)
 my_list.insert_front(3)
 my_list.insert_front(2)
 my_list.insert_front(10)
-print(f'head: {my_list.head}, tail: {my_list.tail}, head.next: {my_list.head.next}')
-print(my_list)
+my_list.insert_end(50)
+my_list.insert_end(51)
+my_list.insert_end(300)
 
+# print(f'head: {my_list.head}, tail: {my_list.tail}, head.next: {my_list.head.next}')
+# print(my_list)
+my_list.insert_after(4, 'banana')
+my_list.insert_after(10, 'taco')
+print(my_list)
